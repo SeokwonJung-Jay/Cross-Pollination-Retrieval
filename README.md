@@ -48,7 +48,7 @@ for line in open(f"{EVAL_DIR}/eval_texts.jsonl"):
 
 Many scientific advances come from *cross-pollination*: carrying an idea from one field over to a problem in another. Yet existing
 retrievers return papers that are semantically similar to the query, and benchmarks for finding papers that inspire research keep
-their query-positive pairs within a narrow region of science (above: 100 random pairs per benchmark on a map of paper embeddings,
+their query-positive pairs within a narrow region of science (above: the 100 pairs farthest apart per benchmark on a map of paper embeddings,
 colored by OpenAlex domain; a filled dot marks the query and an open circle its positive).
 
 We introduce **cross-pollination retrieval**: given a research problem, find papers on *other topics* whose ideas can be transferred
@@ -214,4 +214,13 @@ included and keep their own license.
 
 ## Citation
 
-Citation information will be added after the anonymous review period.
+If you use CPR-Dataset or this code, please cite:
+
+```bibtex
+@misc{jung2026crosspollination,
+  title  = {Cross-Pollination Retrieval: Finding Transferable Ideas Across Fields in Scientific Literature},
+  author = {Jung, Seokwon and Kim, Yerang and Kim, Yejin and Rubinstein, Alexander and Uselis, Arnas and Park, Sangwoo and Yun, Sangdoo and Oh, Seong Joon},
+  year   = {2026},
+  note   = {Technical report}
+}
+```
