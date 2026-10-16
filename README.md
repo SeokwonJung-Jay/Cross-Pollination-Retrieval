@@ -44,7 +44,7 @@ for line in open(f"{EVAL_DIR}/eval_texts.jsonl"):
 
 ## Overview
 
-![CPR-eval spans all four OpenAlex domains](https://huggingface.co/datasets/CPR-Dataset/CPR-Dataset/resolve/main/assets/fig_landscape.png)
+![CPR-eval spans all four OpenAlex domains](assets/fig_landscape.png)
 
 Many scientific advances come from *cross-pollination*: carrying an idea from one field over to a problem in another. Yet existing
 retrievers return papers that are semantically similar to the query, and benchmarks for finding papers that inspire research keep
@@ -55,7 +55,7 @@ We introduce **cross-pollination retrieval**: given a research problem, find pap
 to it. We build **CPR-Dataset** with a scalable pipeline that mines citations through which a paper transferred an idea from another
 topic. **CPR-eval** has **1,300 queries across 26 fields**, and **CPR-train** has **10,573 training pairs**.
 
-![An example of cross-pollination retrieval](https://huggingface.co/datasets/CPR-Dataset/CPR-Dataset/resolve/main/assets/fig_example.png)
+![An example of cross-pollination retrieval](assets/fig_example.png)
 
 For the query above, a paper on the same topic (Generative Adversarial Nets) does not offer what the query needs. A paper on another
 topic, equilibrium free-energy differences in statistical physics, does: the data distribution maps to an initial equilibrium state
