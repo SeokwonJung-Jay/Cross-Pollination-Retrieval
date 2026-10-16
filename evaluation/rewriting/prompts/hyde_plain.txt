@@ -1,0 +1,3 @@
+Please write a scientific paper passage to answer the question
+Question: {query}
+Passage:

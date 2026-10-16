@@ -1,0 +1,88 @@
+# Adapted from NeMo AutoModel examples/retrieval/bi_encoder/llama_embed_nemotron_8b/llama_embed_nemotron_8b.yaml (Apache License 2.0); modified as listed in README.md.
+# llama-embed-nemotron-8b full fine-tuning, 1 epoch (template; train.sh fills in the @...@ fields and writes OUTPUT_DIR/train.yaml).
+# Base: NeMo AutoModel's official recipe examples/retrieval/bi_encoder/llama_embed_nemotron_8b/llama_embed_nemotron_8b.yaml @ 8e562fce.
+# Differences from it (marked "not official"): start from nvidia/llama-embed-nemotron-8b instead of meta-llama/Llama-3.1-8B; our data;
+# max length 1024 (official 512); all hard negatives of a row (official 4); in-batch negatives gathered across GPUs (official off);
+# query = 'Query:' + text in the data, no instruction, no document prompt; seed 42 (official 125); no validation; checkpoint every 50 steps
+# + the final step. Optimizer: torch fused AdamW on fp32 weights (loaded fp32, FSDP2 computes in bf16) = the update of the official
+# TransformerEngine FusedAdam(master_weights=True) (fp32 master weights, bf16 compute); flash_attention_2 and activation checkpointing
+# change only speed / memory.
+
+recipe: TrainBiEncoderRecipe
+
+seed: 42                           # not official (125)
+
+temperature: 0.02
+
+step_scheduler:
+  global_batch_size: 128           # 8 GPUs x local 1 x gradient accumulation 16
+  local_batch_size: 1
+  ckpt_every_steps: 50             # not official (3000): every 50 steps + the final step
+  val_every_steps: 1000000         # no validation set
+  num_epochs: 1
+
+model:
+  _target_: nemo_automodel.NeMoAutoModelBiEncoder.from_pretrained
+  pretrained_model_name_or_path: @BASE_MODEL@   # nvidia/llama-embed-nemotron-8b @ aa3b43a4 without auto_map (prepare_base.py) -> NeMo's llama_bidirec class
+  pooling: avg
+  is_causal: false
+  torch_dtype: float32             # not official (bfloat16 + TE master weights): fp32 weights, bf16 compute via the FSDP2 mixed-precision policy
+  attn_implementation: flash_attention_2
+  do_distributed_inbatch_negative: true   # not official (false): in-batch negatives gathered across the GPUs
+
+tokenizer:   # the repo's tokenizer.json (AutoTokenizer would read the remote-code config, which transformers 5.18 cannot load)
+  _target_: transformers.PreTrainedTokenizerFast.from_pretrained
+  pretrained_model_name_or_path: @TOKENIZER@
+
+dataset:
+  _target_: nemo_automodel.components.datasets.llm.retrieval_dataset.RetrievalDatasetConfig
+  model_type: bi_encoder
+  data_dir_list:
+    - @TRAIN_FILE@                 # inline JSONL from prepare_data.py
+  data_type: train
+  n_passages: @N_PASSAGES@         # not official (5): positive + every hard negative of the row (10 / 2 / 1 for 9 / 1 / 0 negatives)
+  seed: 42
+  do_shuffle: true
+  use_dataset_instruction: false   # not official: no instruction; 'Query:' is in the query text
+
+dataloader:
+  collate_fn:
+    _target_: nemo_automodel.components.datasets.llm.BiEncoderCollator
+    q_max_len: 1024                # not official (512)
+    p_max_len: 1024                # not official (512)
+    query_prefix: ""
+    passage_prefix: ""
+    pad_to_multiple_of: 8
+    use_dataset_instruction: false
+  shuffle: true
+  num_workers: 8
+
+optimizer:
+  _target_: torch.optim.AdamW      # official: TransformerEngine FusedAdam (same AdamW rule, betas 0.9 / 0.999, eps 1e-8, fp32 state)
+  lr: 2.0e-6
+  weight_decay: 0.01
+  fused: true
+
+lr_scheduler:
+  lr_warmup_steps: 2               # NeMo default decay: cosine to 1% of lr over all steps
+
+clip_grad_norm:
+  max_norm: 1.0
+
+checkpoint:
+  enabled: true
+  checkpoint_dir: @CKPT_DIR@
+  model_save_format: safetensors
+  save_consolidated: false         # not official (true): the final checkpoint is consolidated by export.sh (NeMo's tools/offline_hf_consolidation.py)
+
+distributed:
+  strategy: fsdp2
+  dp_size: none
+  tp_size: 1
+  cp_size: 1
+  sequence_parallel: false
+  activation_checkpointing: true
+
+dist_env:
+  backend: nccl
+  timeout_minutes: 30

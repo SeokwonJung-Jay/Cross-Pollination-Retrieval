@@ -1,0 +1,8 @@
+Two search queries were written from the same research paper, each for a different place where the paper cites prior work.
+
+Query A: {query_a}
+Query B: {query_b}
+
+Do the two queries ask about essentially the same problem, so that a paper answering one would answer the other? Differences in wording alone do not make them different problems.
+
+Answer in JSON only: {{"same_problem": true|false, "reason": "<one sentence>"}}

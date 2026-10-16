@@ -1,0 +1,11 @@
+# Inputs of the nemotron/ training environment; requirements.lock is compiled from this file (command in the lock header).
+# NeMo AutoModel 0.8.0 pinned to a main commit (official llama-embed-nemotron-8b bi-encoder recipe); it pins transformers 5.18.0.
+# torch 2.11.0 (cu128), einops 0.8.2, wandb 0.30.0: the versions of our runs.
+# ninja / psutil / wheel: build tools of flash-attn 2.8.3, which is built from source by setup_env.sh (not in the lock: needs the installed torch / CUDA toolkit).
+nemo-automodel @ git+https://github.com/NVIDIA-NeMo/Automodel.git@8e562fceb1c1271f579e85de0bfd4f30bec746a9
+torch==2.11.0
+einops==0.8.2
+wandb==0.30.0
+ninja
+psutil
+wheel

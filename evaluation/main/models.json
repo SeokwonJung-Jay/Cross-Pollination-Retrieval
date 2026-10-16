@@ -1,0 +1,167 @@
+{
+ "_doc": "Main experiment model registry (GUIDE.md section 1). One entry per scored model; encode.py reads only this file, so a rerun with the same file and the same eval-set revision reproduces the run. env = venv key in run.sh. Revisions pinned 2026-10-09.",
+ "bm25": {
+  "family": "Sparse",
+  "label": "BM25",
+  "kind": "bm25",
+  "env": "m3",
+  "library": "bm25s 0.2.14, method lucene, float64, scores x (k1 + 1)",
+  "k1": 1.5,
+  "b": 0.75,
+  "tokenizer": "[a-z0-9]+ on lowercased text",
+  "idf": "over each query's pool (per variant)"
+ },
+ "bge_m3_sparse": {
+  "family": "Sparse",
+  "label": "BGE-M3 (sparse)",
+  "kind": "bgem3",
+  "output": "sparse",
+  "shared_encode": "bge_m3",
+  "env": "m3"
+ },
+ "qwen3_emb_0.6b": {
+  "family": "Dense (general)",
+  "label": "Qwen3-Embedding-0.6B",
+  "kind": "st",
+  "env": "qwen",
+  "hf": "Qwen/Qwen3-Embedding-0.6B",
+  "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "max_len": 512,
+  "dtype": "bfloat16",
+  "padding_side": "left",
+  "sim": "cosine",
+  "batch": 32,
+  "query_prompt": "Query:",
+  "note": "query prompt 'Query:' only (no Qwen default instruction), identical to our trained checkpoints (user 2026-10-09)"
+ },
+ "qwen3_emb_4b": {
+  "family": "Dense (general)",
+  "label": "Qwen3-Embedding-4B",
+  "kind": "st",
+  "env": "qwen",
+  "hf": "Qwen/Qwen3-Embedding-4B",
+  "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+  "max_len": 512,
+  "dtype": "bfloat16",
+  "padding_side": "left",
+  "sim": "cosine",
+  "batch": 16,
+  "query_prompt": "Query:",
+  "note": "query prompt 'Query:' only (no Qwen default instruction), identical to our trained checkpoints (user 2026-10-09)"
+ },
+ "bge_m3_dense": {
+  "family": "Dense (general)",
+  "label": "BGE-M3 (dense)",
+  "kind": "bgem3",
+  "output": "dense",
+  "shared_encode": "bge_m3",
+  "env": "m3"
+ },
+ "gemini_emb_001": {
+  "family": "Dense (general)",
+  "label": "Gemini Embedding",
+  "kind": "gemini",
+  "env": "m3",
+  "api_model": "gemini-embedding-001",
+  "dim": 768,
+  "query_task": "RETRIEVAL_QUERY",
+  "doc_task": "RETRIEVAL_DOCUMENT",
+  "batch": 100,
+  "sim": "cosine",
+  "key": "GEMINI_API_KEY in <repo>/.env"
+ },
+ "specter2": {
+  "family": "Dense (scientific)",
+  "label": "SPECTER2",
+  "kind": "specter2",
+  "env": "specter2",
+  "hf": "allenai/specter2_base",
+  "revision": "3447645e1def9117997203454fa4495937bfbd83",
+  "doc_adapter": [
+   "allenai/specter2",
+   "2081559630a80fc5851d8f798a05ba81e9468089"
+  ],
+  "query_adapter": [
+   "allenai/specter2_adhoc_query",
+   "3f4448817028388648a74349ece07af4518ec5bd"
+  ],
+  "doc_format": "title [SEP] abstract",
+  "pooling": "CLS",
+  "max_len": 512,
+  "sim": "dot",
+  "batch": 32
+ },
+ "openscholar_retriever": {
+  "family": "Dense (scientific)",
+  "label": "OpenScholar Retriever",
+  "kind": "contriever",
+  "env": "m3",
+  "hf": "OpenSciLM/OpenScholar_Retriever",
+  "revision": "ef4f3120d33b3ca57e12fce2b369f5982a7bb929",
+  "pooling": "mean (attention mask)",
+  "normalize": false,
+  "max_len": 512,
+  "sim": "dot",
+  "batch": 64
+ },
+ "inf_retriever_v1_pro": {
+  "family": "Dense (reasoning)",
+  "label": "inf-retriever-v1-pro",
+  "kind": "hf_lasttoken",
+  "env": "infret",
+  "hf": "infly/inf-retriever-v1-pro",
+  "revision": "f3f04b078092c60e0e4ff08a4e5516fe93b9de7e",
+  "trust_remote_code": true,
+  "max_len": 512,
+  "dtype": "float16",
+  "pooling": "last token (model card last_token_pool), then L2 normalize",
+  "sim": "cosine",
+  "batch": 32,
+  "query_prompt": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+  "doc_prompt": "",
+  "note": "query prompt = the model's saved 'query' prompt (config_sentence_transformers.json) and the model card's task, user 2026-10-11: use the official prompt; no document prompt. Remote code (bidirectional Qwen2) needs transformers 4.51.0 (model card) -> venv infret",
+  "encoder": "../bright-top3-ablation/encode.py (main/encode.py has no hf_lasttoken kind); added 2026-10-11 (user): BRIGHT top2 model in the Main table"
+ },
+ "lateon": {
+  "family": "Late Interaction",
+  "label": "LateOn (0.1B)",
+  "kind": "pylate",
+  "env": "lateon",
+  "hf": "lightonai/LateOn",
+  "revision": "62911e105059585d244384c7d17826e35f669c17",
+  "query_len": 512,
+  "doc_len": 512,
+  "sim": "MaxSim (sum over query tokens)",
+  "batch": 32,
+  "note": "2026-10-11 user: max length 512 to match the other models (query 512 / doc 512; was query 64 / doc 300). do_query_expansion is false in the pinned config, so query 512 gives the same query vectors as 64 (checked); only doc 300 -> 512 changes scores"
+ },
+ "bge_m3_multivec": {
+  "family": "Late Interaction",
+  "label": "BGE-M3 (multi-vector)",
+  "kind": "bgem3",
+  "output": "colbert",
+  "shared_encode": "bge_m3",
+  "env": "m3"
+ },
+ "_shared": {
+  "bge_m3": {
+   "kind": "bgem3",
+   "env": "m3",
+   "hf": "BAAI/bge-m3",
+   "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+   "max_len": 512,
+   "fp16": true,
+   "batch": 32,
+   "outputs": [
+    "dense",
+    "sparse",
+    "colbert"
+   ],
+   "sim": {
+    "dense": "dot of normalized CLS",
+    "sparse": "lexical_matching_score",
+    "colbert": "colbert_score (mean MaxSim)"
+   }
+  }
+ }
+}

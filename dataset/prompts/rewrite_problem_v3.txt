@@ -1,0 +1,12 @@
+Rewrite this problem as a concise search query - stating ONLY the goal, with NO hints about mechanisms or methods.
+Original Problem:
+{problem}
+Solution domain to hide: {base_domain}
+Rules:
+1. State only what needs to be achieved, not the method, contribution, or result
+2. Remove all terminology from the solution domain ({base_domain}) and anything that hints at how the problem is solved
+3. Use only what the original problem states; add nothing
+4. Keep the conditions and constraints that define this particular problem (what is studied, what is limited or required), so that a solution from another field could be recognized as fitting it; drop incidental details
+5. Remove all "by...", "through...", "using..." phrases
+6. Format: "How to [goal]"
+Return only the rewritten problem:

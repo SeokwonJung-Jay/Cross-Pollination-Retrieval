@@ -1,0 +1,12 @@
+Below is a research problem and a list of candidate papers, each with an ID, title and abstract.
+Rank the candidates by how likely the method or technique proposed in each paper could be used to solve the problem.
+
+Research problem:
+{query}
+
+Candidates:
+{candidates}
+
+Before answering, briefly review the candidates: for the promising ones, note which part of the problem the paper's method could address and how.
+Then end your answer with JSON giving the IDs of the {k} papers whose methods are most likely to solve the problem, best first:
+{{"top": [id, id, ...]}}

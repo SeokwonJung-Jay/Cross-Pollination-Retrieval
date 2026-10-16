@@ -1,0 +1,10 @@
+A research paper (the problem paper) cites several prior works for the same need. For each cited work you are given its title and abstract, the sentences of the problem paper that cite it, and the analogical mapping extracted between the two papers.
+
+Problem paper title: {q_title}
+Problem paper abstract: {q_abstract}
+
+{candidates}
+
+Which cited work forms the strongest analogy with the problem paper? A stronger analogy transfers more of the cited work's own structure (its method, formulation or finding) to a problem in a different setting, through mappings that are central to what the problem paper does, rather than a surface resemblance or a generic tool.
+
+Answer in JSON only: {{"strongest": <number>, "reason": "<one sentence>"}}

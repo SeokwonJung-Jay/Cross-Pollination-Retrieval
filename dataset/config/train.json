@@ -1,0 +1,37 @@
+{
+ "name": "train",
+ "note": "CPR-train run: 9 hard negatives per pair (3 per group). Paths use ${ENV} (dataset/README.md).",
+ "work": "${WORK}/train",
+ "q_pool": "${DATA}/base_papers/pool_2010_2025.json",
+ "corpus": "${DATA}/universe_2025",
+ "vectors": "${DATA}/vectors_2025",
+ "stage2_cache": "${DATA}/stage2_cache",
+ "pair_prefix": "scaleup",
+ "exclude_positives": "${WORK}/eval/eval_positives.json",
+ "q_per_field": null,
+ "workers": {
+  "stage2_shards": 16,
+  "s3": 64,
+  "s4": 32,
+  "s5": 40,
+  "s5b": 16,
+  "s7b": 16,
+  "s7": 64
+ },
+ "caps": {
+  "s3": 2000.0,
+  "s4": 200.0,
+  "s5": 1000.0,
+  "s5b": 100.0,
+  "s7b": 200.0,
+  "s7": 700.0
+ },
+ "caps_note": "cumulative USD caps per stage (from the cost ledgers in work/); a stage stops starting new calls at its cap",
+ "s4_tier": "default",
+ "s7_mode": "batch",
+ "s7_adaptive": true,
+ "s7_per_stratum": 3,
+ "s7_per_j_r1": 0.00095,
+ "s7_per_j_later": 0.00095,
+ "exclude_base_papers": "${WORK}/eval/eval_base_papers.json"
+}

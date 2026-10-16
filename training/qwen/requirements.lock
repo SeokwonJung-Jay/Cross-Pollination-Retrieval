@@ -1,0 +1,525 @@
+# Pinned qwen/ environment (installed as is with --no-deps by setup_env.sh). Generated 2026-10-06 with uv 0.12.23:
+#   uv pip compile --python-version 3.12 --python-platform x86_64-manylinux_2_28 --torch-backend cu128 --emit-index-url requirements.in -o requirements.lock
+# requirements.in: ms-swift (pinned commit), deepspeed, sentence-transformers, wandb, torch==2.11.0
+--index-url https://pypi.org/simple
+
+absl-py==2.5.0
+    # via tensorboard
+accelerate==1.15.0
+    # via
+    #   ms-swift
+    #   peft
+    #   trl
+addict==2.4.0
+    # via ms-swift
+aiohappyeyeballs==2.7.1
+    # via aiohttp
+aiohttp==3.14.4
+    # via
+    #   fsspec
+    #   ms-swift
+aiosignal==1.4.0
+    # via aiohttp
+aliyun-python-sdk-core==2.16.1
+    # via
+    #   aliyun-python-sdk-kms
+    #   oss2
+aliyun-python-sdk-kms==2.16.5
+    # via oss2
+annotated-doc==0.0.5
+    # via
+    #   fastapi
+    #   typer
+annotated-types==0.8.0
+    # via pydantic
+anyio==4.15.1
+    # via
+    #   httpx
+    #   httpx2
+    #   openai
+    #   starlette
+attrdict==2.0.1
+    # via ms-swift
+attrs==26.1.0
+    # via aiohttp
+binpacking==2.0.1
+    # via ms-swift
+certifi==2026.7.22
+    # via
+    #   httpcore
+    #   httpx
+    #   requests
+cffi==2.1.1
+    # via cryptography
+charset-normalizer==3.5.2
+    # via
+    #   ms-swift
+    #   requests
+click==8.5.0
+    # via
+    #   huggingface-hub
+    #   nltk
+    #   uvicorn
+    #   wandb
+cloudpickle==3.1.2
+    # via joblib
+contourpy==1.4.0
+    # via matplotlib
+cpm-kernels==1.0.11
+    # via ms-swift
+crcmod==1.7
+    # via oss2
+cryptography==50.0.2
+    # via
+    #   aliyun-python-sdk-core
+    #   modelscope-hub
+cuda-bindings==12.9.9
+    # via torch
+cuda-pathfinder==1.8.3
+    # via cuda-bindings
+cuda-toolkit==12.8.1
+    # via torch
+cycler==0.12.1
+    # via matplotlib
+dacite==1.9.2
+    # via ms-swift
+datasets==4.8.4
+    # via
+    #   ms-swift
+    #   trl
+deepspeed==0.19.7
+    # via -r qwen_in.txt
+defusedxml==0.7.1
+    # via nltk
+dill==0.4.1
+    # via
+    #   datasets
+    #   multiprocess
+einops==0.8.2
+    # via
+    #   deepspeed
+    #   ms-swift
+fastapi==0.142.2
+    # via ms-swift
+filelock==4.0.12
+    # via
+    #   datasets
+    #   huggingface-hub
+    #   modelscope
+    #   modelscope-hub
+    #   torch
+fonttools==4.66.1
+    # via matplotlib
+frozenlist==1.8.0
+    # via
+    #   aiohttp
+    #   aiosignal
+fsspec==2026.2.0
+    # via
+    #   datasets
+    #   huggingface-hub
+    #   torch
+googleapis-common-protos==1.75.5
+    # via opentelemetry-exporter-otlp-proto-http
+grpcio==1.84.0
+    # via tensorboard
+h11==0.16.0
+    # via
+    #   httpcore
+    #   httpcore2
+    #   uvicorn
+hf-xet==1.6.0
+    # via huggingface-hub
+hjson==3.1.0
+    # via deepspeed
+httpcore==1.0.9
+    # via httpx
+httpcore2==2.13.1
+    # via httpx2
+httpx==0.28.1
+    # via
+    #   datasets
+    #   huggingface-hub
+httpx2==2.13.1
+    # via openai
+huggingface-hub==1.33.0
+    # via
+    #   accelerate
+    #   datasets
+    #   peft
+    #   sentence-transformers
+    #   tokenizers
+    #   transformers
+idna==3.20
+    # via
+    #   anyio
+    #   httpx
+    #   httpx2
+    #   requests
+    #   yarl
+importlib-metadata==9.0.1
+    # via ms-swift
+jinja2==3.1.6
+    # via torch
+jiter==0.17.0
+    # via openai
+jmespath==1.1.0
+    # via aliyun-python-sdk-core
+joblib==1.6.0
+    # via
+    #   nltk
+    #   scikit-learn
+json-repair==0.63.5
+    # via ms-swift
+kiwisolver==1.5.1
+    # via matplotlib
+markdown==3.11
+    # via tensorboard
+markdown-it-py==4.2.0
+    # via rich
+markupsafe==3.0.4
+    # via
+    #   jinja2
+    #   werkzeug
+matplotlib==3.11.2
+    # via ms-swift
+mdurl==0.1.2
+    # via markdown-it-py
+modelscope==1.40.1
+    # via ms-swift
+modelscope-hub==0.4.5
+    # via modelscope
+mpmath==1.3.0
+    # via sympy
+ms-swift @ git+https://github.com/modelscope/ms-swift.git@dc6f9d9f858d4bf34cdf3b218ddc05343c8209d6
+    # via -r qwen_in.txt
+msgpack==1.2.3
+    # via deepspeed
+multidict==6.9.1
+    # via
+    #   aiohttp
+    #   yarl
+multiprocess==0.70.19
+    # via datasets
+narwhals==2.26.0
+    # via scikit-learn
+networkx==3.7
+    # via torch
+ninja==1.13.2
+    # via deepspeed
+nltk==3.10.3
+    # via ms-swift
+numpy==2.5.3
+    # via
+    #   accelerate
+    #   contourpy
+    #   datasets
+    #   deepspeed
+    #   matplotlib
+    #   ms-swift
+    #   pandas
+    #   peft
+    #   scikit-learn
+    #   scipy
+    #   sentence-transformers
+    #   tensorboard
+    #   transformers
+nvidia-cublas-cu12==12.8.4.1
+    # via
+    #   cuda-toolkit
+    #   nvidia-cudnn-cu12
+    #   nvidia-cusolver-cu12
+nvidia-cuda-cupti-cu12==12.8.90
+    # via cuda-toolkit
+nvidia-cuda-nvrtc-cu12==12.8.93
+    # via cuda-toolkit
+nvidia-cuda-runtime-cu12==12.8.90
+    # via cuda-toolkit
+nvidia-cudnn-cu12==9.19.0.56
+    # via torch
+nvidia-cufft-cu12==11.3.3.83
+    # via cuda-toolkit
+nvidia-cufile-cu12==1.13.1.3
+    # via cuda-toolkit
+nvidia-curand-cu12==10.3.9.90
+    # via cuda-toolkit
+nvidia-cusolver-cu12==11.7.3.90
+    # via cuda-toolkit
+nvidia-cusparse-cu12==12.5.8.93
+    # via
+    #   cuda-toolkit
+    #   nvidia-cusolver-cu12
+nvidia-cusparselt-cu12==0.7.1
+    # via torch
+nvidia-nccl-cu12==2.28.9
+    # via torch
+nvidia-nvjitlink-cu12==12.8.93
+    # via
+    #   cuda-toolkit
+    #   nvidia-cufft-cu12
+    #   nvidia-cusolver-cu12
+    #   nvidia-cusparse-cu12
+nvidia-nvshmem-cu12==3.4.5
+    # via torch
+nvidia-nvtx-cu12==12.8.90
+    # via cuda-toolkit
+openai==3.24.0
+    # via ms-swift
+opentelemetry-api==1.45.0
+    # via
+    #   fastapi
+    #   opentelemetry-exporter-http-transport
+    #   opentelemetry-exporter-otlp-proto-http
+    #   opentelemetry-sdk
+    #   opentelemetry-semantic-conventions
+    #   wandb
+opentelemetry-exporter-http-transport==0.66b0
+    # via opentelemetry-exporter-otlp-proto-http
+opentelemetry-exporter-otlp-common==0.66b0
+    # via opentelemetry-exporter-otlp-proto-http
+opentelemetry-exporter-otlp-proto-common==1.45.0
+    # via opentelemetry-exporter-otlp-proto-http
+opentelemetry-exporter-otlp-proto-http==1.45.0
+    # via wandb
+opentelemetry-proto==1.45.0
+    # via
+    #   opentelemetry-exporter-otlp-proto-common
+    #   opentelemetry-exporter-otlp-proto-http
+opentelemetry-sdk==1.45.0
+    # via
+    #   opentelemetry-exporter-otlp-common
+    #   opentelemetry-exporter-otlp-proto-http
+    #   wandb
+opentelemetry-semantic-conventions==0.66b0
+    # via opentelemetry-sdk
+oss2==2.19.1
+    # via ms-swift
+packaging==26.3
+    # via
+    #   accelerate
+    #   datasets
+    #   deepspeed
+    #   huggingface-hub
+    #   matplotlib
+    #   modelscope
+    #   peft
+    #   tensorboard
+    #   transformers
+    #   trl
+    #   wandb
+pandas==3.0.6
+    # via
+    #   datasets
+    #   ms-swift
+peft==0.20.0
+    # via ms-swift
+pillow==12.3.0
+    # via
+    #   matplotlib
+    #   ms-swift
+    #   tensorboard
+platformdirs==4.12.3
+    # via wandb
+propcache==0.5.4
+    # via
+    #   aiohttp
+    #   yarl
+protobuf==7.36.2
+    # via
+    #   googleapis-common-protos
+    #   opentelemetry-proto
+    #   tensorboard
+    #   wandb
+psutil==7.2.2
+    # via
+    #   accelerate
+    #   deepspeed
+    #   peft
+py-cpuinfo==9.0.0
+    # via deepspeed
+pyarrow==25.0.1
+    # via datasets
+pycparser==3.0
+    # via cffi
+pycryptodome==3.24.0
+    # via oss2
+pydantic==2.13.5
+    # via
+    #   deepspeed
+    #   fastapi
+    #   openai
+    #   wandb
+pydantic-core==2.46.5
+    # via pydantic
+pygments==2.21.0
+    # via rich
+pyparsing==3.3.3
+    # via matplotlib
+python-dateutil==2.9.0.post0
+    # via
+    #   matplotlib
+    #   pandas
+pyyaml==6.0.3
+    # via
+    #   accelerate
+    #   datasets
+    #   huggingface-hub
+    #   ms-swift
+    #   peft
+    #   transformers
+    #   wandb
+regex==2026.9.29
+    # via
+    #   nltk
+    #   tiktoken
+    #   transformers
+requests==2.34.2
+    # via
+    #   datasets
+    #   modelscope
+    #   modelscope-hub
+    #   ms-swift
+    #   oss2
+    #   tiktoken
+    #   wandb
+rich==15.0.0
+    # via typer
+rouge==1.0.1
+    # via ms-swift
+safetensors==0.8.0
+    # via
+    #   accelerate
+    #   ms-swift
+    #   peft
+    #   transformers
+scikit-learn==1.9.1
+    # via sentence-transformers
+scipy==1.18.1
+    # via
+    #   ms-swift
+    #   scikit-learn
+    #   sentence-transformers
+sentence-transformers==6.1.0
+    # via -r qwen_in.txt
+sentencepiece==0.2.2
+    # via ms-swift
+setuptools==81.0.0
+    # via
+    #   modelscope
+    #   tensorboard
+    #   torch
+shellingham==1.5.4
+    # via typer
+simplejson==4.2.0
+    # via ms-swift
+six==1.17.0
+    # via
+    #   attrdict
+    #   oss2
+    #   python-dateutil
+    #   rouge
+sniffio==1.3.1
+    # via openai
+sortedcontainers==2.4.0
+    # via ms-swift
+starlette==1.7.0
+    # via fastapi
+sympy==1.14.0
+    # via torch
+tensorboard==2.21.0
+    # via ms-swift
+tensorboard-data-server==0.7.2
+    # via tensorboard
+threadpoolctl==3.7.0
+    # via scikit-learn
+tiktoken==0.14.0
+    # via ms-swift
+tokenizers==0.23.2
+    # via
+    #   sentence-transformers
+    #   transformers
+torch==2.11.0+cu128
+    # via
+    #   -r qwen_in.txt
+    #   accelerate
+    #   deepspeed
+    #   peft
+    #   sentence-transformers
+tqdm==4.70.1
+    # via
+    #   datasets
+    #   deepspeed
+    #   huggingface-hub
+    #   modelscope
+    #   modelscope-hub
+    #   ms-swift
+    #   nltk
+    #   peft
+    #   sentence-transformers
+    #   transformers
+transformers==5.16.1
+    # via
+    #   ms-swift
+    #   peft
+    #   sentence-transformers
+    #   transformers-stream-generator
+    #   trl
+transformers-stream-generator==0.0.5
+    # via ms-swift
+triton==3.6.0
+    # via torch
+trl==0.29.1
+    # via ms-swift
+truststore==0.10.4
+    # via
+    #   httpcore2
+    #   httpx2
+typer==0.27.2
+    # via transformers
+typing-extensions==4.16.0
+    # via
+    #   aiohttp
+    #   aiosignal
+    #   anyio
+    #   fastapi
+    #   grpcio
+    #   httpx2
+    #   huggingface-hub
+    #   openai
+    #   opentelemetry-api
+    #   opentelemetry-exporter-otlp-proto-http
+    #   opentelemetry-sdk
+    #   opentelemetry-semantic-conventions
+    #   pydantic
+    #   pydantic-core
+    #   sentence-transformers
+    #   starlette
+    #   torch
+    #   typing-inspection
+    #   wandb
+typing-inspection==0.4.4
+    # via
+    #   fastapi
+    #   pydantic
+urllib3==2.8.0
+    # via
+    #   modelscope
+    #   modelscope-hub
+    #   opentelemetry-exporter-http-transport
+    #   requests
+uvicorn==0.54.0
+    # via ms-swift
+wandb==0.30.0
+    # via -r qwen_in.txt
+werkzeug==3.1.9
+    # via tensorboard
+xxhash==4.0.1
+    # via
+    #   datasets
+    #   wandb
+yarl==1.25.1
+    # via aiohttp
+zipp==4.1.1
+    # via importlib-metadata
+zstandard==0.25.0
+    # via ms-swift

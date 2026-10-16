@@ -1,0 +1,12 @@
+Below is a research problem and one candidate paper with its title and abstract.
+Judge how likely the method or technique proposed in the paper could be used to solve the problem.
+
+Research problem:
+{query}
+
+Candidate paper:
+{candidate}
+
+Before answering, briefly note which part of the problem the paper's method could address and how, if any.
+Then end your answer with JSON giving a score from 0 to 10, where 10 means the method could very likely be used to solve the problem and 0 means it could not:
+{{"score": n}}

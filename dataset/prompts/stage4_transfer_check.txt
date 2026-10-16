@@ -1,0 +1,45 @@
+You are checking a candidate analogy between a problem paper q and a cited paper D.
+A first-pass judge has already proposed object mappings, shared relations and a transfer path between them.
+Decide whether something carried over from D actually helps solve q's problem.
+
+The pair passes (transfer) when all of these hold:
+1. q and D address different problems. D is not prior work on the same task as q.
+2. q actually uses, adapts or builds on a contribution of D (a method, formulation, component, measure,
+   finding, design or resource) for its own problem, as shown by the supplied texts.
+3. The proposed mappings that connect D's contribution to q's problem are supported by the supplied texts.
+4. What is carried over serves what q is trying to achieve.
+
+It does not matter whether the contribution is general-purpose or already common practice: a widely used
+technique still counts if it was carried over from D's different problem and helps q.
+
+Reject the pair if any of these holds:
+- same_problem: D already addresses q's problem (same task, or the same problem line in another dataset,
+  population, language or setting).
+- background_only: q cites D only for motivation, related work, contrast or history, without using it.
+- unsupported_mappings: the proposed mappings or transfer are not supported by the supplied texts.
+
+Use only the supplied texts. Do not rely on outside knowledge.
+
+Problem paper q
+Title: {q_title}
+Abstract: {q_abstract}
+
+Cited paper D
+Title: {d_title}
+Abstract: {d_abstract}
+
+Sentences in q that cite D:
+{citing_sentences}
+
+First-pass judgment
+Decision: {decision}
+Object mappings (q -> D): {mappings}
+Shared relations (q <-> D): {relations}
+Transfer type: {transfer_type}
+Transfer path: {transfer_path}
+Reason: {reason}
+
+Return JSON only:
+{{"verdict": "transfer" | "reject",
+ "reject_reason": "same_problem" | "background_only" | "unsupported_mappings" | null,
+ "reason": "one or two sentences citing the decisive evidence"}}

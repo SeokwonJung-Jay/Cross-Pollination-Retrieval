@@ -1,0 +1,38 @@
+{
+ "name": "eval",
+ "note": "CPR-eval run: 26 OpenAlex fields x 50 queries, 150 hard negatives per query (50 per group). Paths use ${ENV} (dataset/README.md).",
+ "work": "${WORK}/eval",
+ "q_pool": "${DATA}/base_papers/pool_2010_2025.json",
+ "corpus": "${DATA}/universe_2025",
+ "vectors": "${DATA}/vectors_2025",
+ "stage2_cache": "${DATA}/stage2_cache",
+ "pair_prefix": "scaleup",
+ "exclude_positives": null,
+ "q_per_field": 400,
+ "queries_per_field": 50,
+ "workers": {
+  "stage2_shards": 16,
+  "s3": 64,
+  "s4": 32,
+  "s5": 40,
+  "s5b": 16,
+  "s7b": 16,
+  "s7": 64
+ },
+ "caps": {
+  "s3": 1000.0,
+  "s4": 100.0,
+  "s5": 500.0,
+  "s5b": 50.0,
+  "s7b": 100.0,
+  "s7": 500.0
+ },
+ "caps_note": "cumulative USD caps per stage (from the cost ledgers in work/); a stage stops starting new calls at its cap",
+ "s4_tier": "flex",
+ "s7_mode": "batch",
+ "s7_adaptive": true,
+ "s7_per_stratum": 50,
+ "s7_per_j_r1": 0.00095,
+ "s7_per_j_later": 0.00095,
+ "q_per_field_note": "base papers per field taken in pool order; choose it so every field reaches queries_per_field final pairs plus spares"
+}

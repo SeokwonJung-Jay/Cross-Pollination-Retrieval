@@ -1,0 +1,15 @@
+# Inputs of the nemotron/ evaluation environment (llama-embed-nemotron-8b with its official remote code); requirements-eval.lock is
+# compiled from this file (command in the lock header). transformers 4.51.0 = the model card's requirement; sentence-transformers 5.1.2,
+# accelerate 1.6.0, torch 2.11.0 (cu128): the versions of our evaluation. pandas / pyarrow: BRIGHT data.
+# ninja / psutil / wheel: build tools of flash-attn 2.8.3, which is built from source by setup_env_eval.sh.
+torch==2.11.0
+transformers==4.51.0
+sentence-transformers==5.1.2
+accelerate==1.6.0
+einops==0.8.2
+numpy
+pandas
+pyarrow
+ninja
+psutil
+wheel

@@ -1,0 +1,11 @@
+# Inputs of the qwen/ environment; requirements.lock is compiled from this file (command in the lock header).
+# ms-swift: the framework of Qwen3-Embedding docs/training/SWIFT.md, pinned to a main commit
+#   (includes the multi-GPU InfoNCE gradient fix #10081 after v4.5.3).
+# deepspeed: --deepspeed in the SWIFT.md command. sentence-transformers: finalize.py checks. wandb: logging.
+# torch 2.11.0 (cu128).
+# flash-attn==2.8.3 is built from source by setup_env.sh (not in the lock: needs the installed torch / CUDA toolkit).
+ms-swift @ git+https://github.com/modelscope/ms-swift.git@dc6f9d9f858d4bf34cdf3b218ddc05343c8209d6
+deepspeed
+sentence-transformers
+wandb
+torch==2.11.0

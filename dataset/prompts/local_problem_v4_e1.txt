@@ -1,0 +1,12 @@
+You are given the title and abstract of a research paper, and the sentences in which this paper cites a specific prior work (the citation is marked [CITATION]).
+Title: {title}
+Abstract: {abstract}
+Citation context:
+{citation_context}
+Task: state the problem the authors are trying to solve AT THE POINT of the citation context, in 1-2 sentences. Describe only the problem (what is difficult or missing and why), not the paper's method, contribution, or results. If the context is a background or related-work remark, state the problem that remark is motivating.
+If the citation context describes a component of the paper's own method, do not state that component: state the need it serves, that is, the difficulty that existed before the paper's approach and that the component is meant to overcome.
+State the problem only: do not describe the paper's method, model, contribution, or results, and do not use "by", "through" or "using" phrases that name a technique. Everything you write must be supported by the supplied text.
+Write in plain prose without mathematical variables or symbols.
+What the authors took from the cited work: {contribution}
+State the problem as it stood before they had this: what they needed and why it was hard. Do not name or describe this contribution, or the way the authors applied it.
+Return only the problem statement:

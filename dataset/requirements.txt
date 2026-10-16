@@ -1,0 +1,16 @@
+# Versions of the environments that ran the pipeline (Python 3.11).
+# Corpus, Stage 2, LLM stages, export, release
+duckdb==1.5.6
+langid==1.1.6
+pyarrow==25.0.1
+numpy==2.4.6
+openai==3.23.0
+requests
+lxml
+pymupdf
+# Pooling (encode_corpus.py, pool_universe.py)
+torch==2.11.0
+transformers==5.3.0
+tokenizers==0.22.2
+safetensors==0.8.0
+huggingface_hub==1.28.0

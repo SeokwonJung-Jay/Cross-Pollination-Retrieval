@@ -1,0 +1,12 @@
+You are checking a search query that is supposed to state a research PROBLEM (what must be achieved), written from the paper below. Judge the query strictly.
+Paper title: {title}
+Paper abstract: {abstract}
+Sentences from the paper that cite the work the query was written for (citation markers masked as [CITATION]):
+{citation_context}
+Query: {query}
+Answer in JSON with these fields:
+- "problem_only": true if the query states only what must be achieved; false if it describes a method, model, algorithm, training procedure, or the paper's contribution or result.
+- "grounded": true if everything in the query is supported by the title, abstract, or the cited sentences; false if it introduces information not in them.
+- "well_formed": true if it is one natural-language question in the form "How to ...", in plain lowercase English apart from proper names, with no uppercase predicate tokens or mathematical variables, no citation markers, and no meta-language about analogies, mappings, graphs, or instructions (technical uses of words such as "domain adaptation" or "multi-domain dialogue" are fine).
+- "issue": one short sentence naming the problem if any field is false, else "".
+Return only the JSON.

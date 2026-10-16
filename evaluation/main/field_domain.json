@@ -1,0 +1,7 @@
+{
+  "_note": "OpenAlex field -> domain (4 domains, 26 fields). Query `field` values in the eval set use these 26 names. Checked against every OpenAlex topic returned by fetch_openalex.py: 0 mismatches.",
+  "Life Sciences": ["Agricultural and Biological Sciences", "Biochemistry, Genetics and Molecular Biology", "Immunology and Microbiology", "Neuroscience", "Pharmacology, Toxicology and Pharmaceutics"],
+  "Social Sciences": ["Arts and Humanities", "Business, Management and Accounting", "Decision Sciences", "Economics, Econometrics and Finance", "Psychology", "Social Sciences"],
+  "Physical Sciences": ["Chemical Engineering", "Chemistry", "Computer Science", "Earth and Planetary Sciences", "Energy", "Engineering", "Environmental Science", "Materials Science", "Mathematics", "Physics and Astronomy"],
+  "Health Sciences": ["Medicine", "Nursing", "Veterinary", "Dentistry", "Health Professions"]
+}

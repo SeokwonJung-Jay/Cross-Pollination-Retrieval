@@ -1,0 +1,117 @@
+You are judging whether a cited solution D forms a useful cross-domain analogy for a problem paper q.
+
+Your task combines two formerly separate checks:
+1. Extract and validate the structural analogy between q and D.
+2. Decide whether q actually transfers D's contribution and, separately, whether the analogy could plausibly help q even when actual transfer is not evidenced.
+
+Use only the supplied problem, solution, and relevance text as evidence. Domain labels are screening metadata, not sufficient evidence by themselves. Do not rely on outside knowledge. Do not invent mappings, relations, uses, or benefits.
+
+Definitions
+
+- q / problem domain: the paper or task seeking help. This is the source side of every object mapping.
+- D / solution domain: the cited paper whose structure or contribution may be transferred. This is the target side of every object mapping.
+- Functional object mapping: a correspondence between a q-side object and a D-side object based on what each does in the relevant system, not merely on a shared name, topic, or attribute.
+- Shared relation: the same predicate that holds among mapped objects in both domains. Every argument in a shared relation must occur in object_mappings. A property of one object, such as "is liquid" or "is large", is not a shared relation.
+- Structural analogy: at least two grounded functional object mappings and at least one grounded shared relation, with the same relational pattern holding across the two domains.
+- Actual transfer: the relevance text shows that q uses, adapts, or builds on D's contribution to address q's problem through a validated cross-domain relational correspondence. Adoption alone is not evidence of analogy: it is not enough that q takes something from D; the evidence must show that D's relational structure corresponds to and is transferred into a different problem structure in q.
+- Analogy-mediated potential: even if actual transfer is not shown, carrying a concrete contribution from D to q along the validated mappings would plausibly help address q's stated goal. Generic usefulness, topical relatedness, or direct reuse without a cross-domain mapping is not analogy-mediated potential.
+
+Joint-evidence rule
+
+- The Relevance text does not need to state every object mapping or shared relation explicitly. You may combine the Cited Solution D's Description with the Relevance text and the Problem q text: the Description may establish D's contribution, objects, and internal relations, while the Relevance text may establish how q invokes, uses, adapts, or connects to that contribution. If these supplied texts jointly ground at least two functional object mappings and one shared relation between q and D, the structural analogy may be accepted and the pair may receive a positive decision under the final decision rules.
+- This rule does not permit outside knowledge or invented correspondences. The Relevance text must identify a concrete connection between q and D rather than merely cite D in a background list. For observed_analogy, the Relevance text must still evidence actual use, adaptation, or building on D's contribution through the validated correspondence. If actual transfer is not evidenced, a positive decision is limited to potential_analogy and still requires a concrete, evidence-grounded transfer_path that addresses q's stated goal.
+
+Apply these exclusions before accepting an analogy
+
+1. Same problem: Set same_problem to true when D is prior work on the same task as q, judged by what the two papers set out to do and by D's role in the relevance text. Different terminology or domain labels do not by themselves make the pair cross-domain. A same-problem pair is not an analogy.
+2. Background or narrative only: A citation used only for motivation, a literature list, historical context, contrast, or evidence is not an analogy unless q transfers a relational structure from D.
+3. Tool or data as-is: Using D only as an unchanged dataset, benchmark, software package, pretrained resource, measurement tool, or lookup source is not an analogy. Adaptation of the resource counts only when the adaptation itself is grounded through the mappings and addresses q's goal.
+4. Term borrowing: Reusing a name or metaphor without a functional relational correspondence is not an analogy.
+5. Surface similarity: Shared topics, nouns, attributes, or broad statements such as "both involve networks" are insufficient.
+6. Unsupported possibility: The fact that D could conceivably inspire q is insufficient. Potential requires a specific, evidence-grounded transfer path from a contribution of D, through the mappings, to a difficulty or objective in q.
+7. Unconnected mapping: A plausible mapping that does not address what q is trying to achieve is neither actual transfer nor useful potential.
+8. Adoption without relational transfer: The fact that q adopts, imports, applies, or modifies something from D does not by itself establish an analogy. Reject the pair unless the supplied evidence grounds how D's relational structure corresponds to a different problem structure in q and is transferred through that correspondence.
+
+Judge in this order
+
+A. Determine whether q and D address the same problem. If they do, reject the analogy.
+B. Propose only functional object mappings explicitly stated or jointly and strongly implied by the Problem q text, the Cited Solution D's Description, and the Relevance text. Prefer 4-8 mappings when the evidence supports them, but never add mappings merely to reach a count.
+C. Test each shared relation. Use predicate form and the same predicate name on both sides. Confirm that every predicate argument appears in object_mappings.
+D. Try to falsify the analogy using the exclusions above. In particular, distinguish relational transfer from background citation, unchanged tool/data use, term borrowing, and surface resemblance.
+E. Judge actual transfer from the relevance text. transfer_holds is true only when q demonstrably uses, adapts, or builds on D's method, formulation, evaluation design, data construction, or finding to address q's problem through the validated cross-domain relational correspondence. Mere adoption from D does not establish transfer_holds. Statements about what q could do do not establish actual transfer.
+F. Judge potential independently. transferable is true only when there is a concrete transfer_path explaining: (i) what contribution comes from D, (ii) how the validated mappings carry it into q, and (iii) how that transfer could help q's stated goal. transfer_holds=true requires transferable=true.
+G. Assign the final decision by the deterministic rules below.
+
+Final decision rules
+
+- "observed_analogy": structural_analogy=true and transfer_holds=true.
+- "potential_analogy": structural_analogy=true, transfer_holds=false, and transferable=true.
+- "not_analogy": every other case.
+
+If same_problem=true, or if the pair is only background, narrative, tool/data as-is, term borrowing, or surface similarity, return empty object_mappings and shared_relations, set structural_analogy, transfer_holds, and transferable to false, use an empty transfer_path, and choose not_analogy.
+
+transfer_type must be exactly one of:
+- "method"
+- "problem_formulation"
+- "evaluation_design"
+- "data_construction"
+- "finding_or_evidence"
+- "narrative_only"
+- "tool_as_is"
+- "same_problem"
+- "none"
+
+Use narrative_only for a list/background/motivation mention with nothing structurally transferred; tool_as_is for unchanged resource use; same_problem when same_problem is true; and none when no more specific type applies. For observed_analogy or potential_analogy, choose the contribution type that would be transferred.
+
+Return exactly one JSON object matching this schema and no other text:
+
+{{
+  "target_domain": "the supplied solution domain",
+  "same_problem": false,
+  "object_mappings": [
+    {{
+      "source": "q-side problem object",
+      "target": "D-side solution object",
+      "mapping_rationale": "brief evidence-grounded functional correspondence"
+    }}
+  ],
+  "shared_relations": [
+    {{
+      "relation": "PREDICATE_NAME",
+      "problem": "PREDICATE_NAME(q_object_A, q_object_B)",
+      "solution": "PREDICATE_NAME(D_object_A, D_object_B)"
+    }}
+  ],
+  "structural_analogy": true,
+  "transfer_holds": false,
+  "transferable": true,
+  "transfer_type": "method",
+  "transfer_path": "D contribution -> mapped q structure -> expected help for q's goal",
+  "critic": {{
+    "background_only": false,
+    "tool_or_data_as_is": false,
+    "term_borrowing_only": false,
+    "surface_similarity_only": false,
+    "mappings_grounded": true,
+    "relations_grounded": true,
+    "relation_arguments_mapped": true,
+    "addresses_problem_goal": true
+  }},
+  "decision": "potential_analogy",
+  "reason": "one or two concise sentences citing or closely paraphrasing the decisive supplied evidence"
+}}
+
+Boolean fields must be JSON booleans, not strings. Do not include markdown fences. Do not reveal hidden reasoning; provide only the requested concise rationales and final JSON fields.
+
+<!-- PROMPT_CACHE_BREAKPOINT: pair-specific input begins below -->
+
+Problem Domain: {source_domain}
+Solution Domain: {target_domain}
+
+Problem q:
+{problem}
+
+Cited Solution D:
+- Title: {solution_title}
+- Description: {description}
+- Relevance: {relevance}
