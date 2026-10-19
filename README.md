@@ -219,7 +219,7 @@ If you use CPR-Dataset or this code, please cite:
 ```bibtex
 @misc{jung2026crosspollination,
   title  = {Cross-Pollination Retrieval: Finding Transferable Ideas Across Fields in Scientific Literature},
-  author = {Jung, Seokwon and Kim, Yerang and Kim, Yejin and Rubinstein, Alexander and Uselis, Arnas and Park, Sangwoo and Yun, Sangdoo and Oh, Seong Joon},
+  author = {Jung, Seokwon and Kim, Yerang and Kim, Yejin and Rubinstein, Alexander and Uselis, Arnas and Park, Sangwoo and Oh, Seong Joon and Yun, Sangdoo},
   year   = {2026},
   note   = {Technical report}
 }
